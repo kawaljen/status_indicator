@@ -87,7 +87,7 @@ class ccc_si_widget extends WP_Widget {
         
 		?>	
 		<div class="ccc_si_content">		
-
+				<!-- add front end content here -->
 		</div>   
 		<script type="text/javascript">  
 			jQuery(function($) {    
