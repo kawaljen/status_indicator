@@ -2,15 +2,48 @@
 <head>
     <title>Title</title>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="globe_indicator.js" type="text/javascript" />
+    <script type="text/javascript">
+    var widget_config = {
+        'image_id':'status_indicator',
+        "status_urls": {
+            'up':'http://understanding-geek.com/status_indicator/traffic_light_circle_green.png',
+            'down':'http://understanding-geek.com/status_indicator/traffic_light_circle_red.png',
+            'unknown': ''
+        },
+        'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
+    }
 
+    function setStatusIndicator(status) {
+        status = status || 'unknown';
+        $('#'+widget_config['image_id'])
+                .attr('src', widget_config['status_urls'][status])
+    }
+
+
+    $(document).ready(function(){
+        $.ajax({
+            url: widget_config['status_endpoint'],
+            dataType: 'jsonp',
+            success: function(json) {
+                try {
+                    setStatusIndicator([json.status]);
+                } catch (err) {
+                    console.log("Could not find an image for the status reported.");
+                }
+            },
+            error: function(json) {
+                setStatusIndicator();
+            }
+        });
+    });
+
+
+</script>
 </head>
 <body>
 
-<script type="text/javascript" >
-    setIndicator();
+<img id="status_indicator" src="">
 
-</script>
 </body>
 
 </html>
