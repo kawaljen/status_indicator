@@ -39,9 +39,9 @@ class ccc_si_widget extends WP_Widget {
     }  
     	
 	function form( $instance ) {
-		$instance = wp_parse_args( (array) $instance, array( 	'notrunning' => array('id' => 1, 'img' => 'not-running.png'), 
-																'disable' => array('id' => 2, 'img' => 'disable.png'), 
-																'running' => array('id' => 3, 'img' => 'running.png') ));
+		$instance = wp_parse_args( (array) $instance, array( 	'down' => array('id' => 1, 'img' => 'not-up.png'), 
+																'unknown' => array('id' => 2, 'img' => 'disable.png'),
+																'up' => array('id' => 3, 'img' => 'up.png') ));
 		extract($instance);
 		?>
         <div class="ccc_si">
@@ -51,18 +51,18 @@ class ccc_si_widget extends WP_Widget {
 		<div>
 
 			<div >
-				<label  for="<?php echo $this->get_field_name("notrunning"); ?>[img]">Not running : </label>
-				<input type="text" class="text" id="<?php echo $this->get_field_id("notrunning"); ?>[img]" name="<?php echo $this->get_field_name("notrunning"); ?>[img]" size="12" value="<?php if (isset($notrunning['img'])) { echo $notrunning['img'];} ?>" />				
+				<label  for="<?php echo $this->get_field_name("down"); ?>[img]">Not up : </label>
+				<input type="text" class="text" id="<?php echo $this->get_field_id("down"); ?>[img]" name="<?php echo $this->get_field_name("down"); ?>[img]" size="12" value="<?php if (isset($down['img'])) { echo $down['img'];} ?>" />				
 			</div>
 
 			<div >
-				<label  for="<?php echo $this->get_field_name("disable"); ?>[img]">Disable : </label>
-				<input type="text" class="text" id="<?php echo $this->get_field_id("disable"); ?>[img]" name="<?php echo $this->get_field_name("disable"); ?>[img]" size="12" value="<?php if (isset($disable['img'])) { echo $disable['img'];} ?>" />				
+				<label  for="<?php echo $this->get_field_name("unknown"); ?>[img]">Disable : </label>
+				<input type="text" class="text" id="<?php echo $this->get_field_id("unknown"); ?>[img]" name="<?php echo $this->get_field_name("disable"); ?>[img]" size="12" value="<?php if (isset($unknown['img'])) { echo $unknown['img'];} ?>" />
 			</div>
 
 			<div >
-				<label  for="<?php echo $this->get_field_name("running"); ?>[img]">Running : </label>
-				<input type="text" class="text" id="<?php echo $this->get_field_id("running"); ?>[img]" name="<?php echo $this->get_field_name("running"); ?>[img]" size="12" value="<?php if (isset($running['img'])) { echo $running['img'];} ?>" />				
+				<label  for="<?php echo $this->get_field_name("up"); ?>[img]">Running : </label>
+				<input type="text" class="text" id="<?php echo $this->get_field_id("up"); ?>[img]" name="<?php echo $this->get_field_name("up"); ?>[img]" size="12" value="<?php if (isset($up['img'])) { echo $up['img'];} ?>" />				
 			</div>			  
 		</div>
         <div class="clear"></div>
@@ -74,9 +74,9 @@ class ccc_si_widget extends WP_Widget {
 	
 	function update( $new_instance, $old_instance ) {	
 		$instance = $old_instance;    
-		$instance['notrunning'] = $new_instance['notrunning'];
-		$instance['disable'] = $new_instance['disable'];
-		$instance['running'] = $new_instance['running'];
+		$instance['down'] = $new_instance['down'];
+		$instance['unknown'] = $new_instance['unknown'];
+		$instance['up'] = $new_instance['up'];
 		return $instance;	
 	}	
 	function widget( $args, $instance ) {	
@@ -89,7 +89,24 @@ class ccc_si_widget extends WP_Widget {
 		<div class="ccc_si_content">		
 				<!-- add front end content here -->
 		</div>   
-		<script type="text/javascript">  
+		<script type="text/javascript">
+		    widget_config = {
+                'image_id':'status_indicator',
+                'states': {
+                    "down":{"img":"http://understanding-geek.com/status_indicator/traffic_light_circle_red.png"},
+                    "unknown":{"img":"disable.png"},
+                    "up":{"img":"http://understanding-geek.com/status_indicator/traffic_light_circle_green.png"}
+                    },
+            'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
+            }
+
+
+            widget_config = {
+                 'image_id':'status_indicator',
+                 'states':  <?php echo json_encode($instance); ?>
+                 'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
+            }
+
 			jQuery(function($) {    
 				$('#<?php echo $widget_id; ?>_content').data('args', <?php echo json_encode($instance); ?>);  
 			});  
