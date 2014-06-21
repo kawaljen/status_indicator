@@ -86,31 +86,19 @@ class ccc_si_widget extends WP_Widget {
 		wp_enqueue_style('ccc_si_widget');  
         
 		?>	
-		<div class="ccc_si_content">		
-				<!-- add front end content here -->
-		</div>   
+		<div class="ccc_si_content" id="<?php echo $widget_id;?>">
 		<script type="text/javascript">
-		    widget_config = {
-                'image_id':'status_indicator',
-                'states': {
-                    "down":{"img":"http://understanding-geek.com/status_indicator/traffic_light_circle_red.png"},
-                    "unknown":{"img":"disable.png"},
-                    "up":{"img":"http://understanding-geek.com/status_indicator/traffic_light_circle_green.png"}
-                    },
-            'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
-            }
+			jQuery(function($) {
+                widget_config = {
+                     'image_id':'status_indicator',
+                     'states':  <?php echo json_encode($instance); ?>  ,
+                     'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
+                }
+				$('#<?php echo $widget_id; ?>').data('args', widget_config);
 
-
-            widget_config = {
-                 'image_id':'status_indicator',
-                 'states':  <?php echo json_encode($instance); ?>
-                 'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
-            }
-
-			jQuery(function($) {    
-				$('#<?php echo $widget_id; ?>_content').data('args', <?php echo json_encode($instance); ?>);  
-			});  
-		</script>  
+			});
+		</script>
+		</div>
 <?php 	
 	}  
 	

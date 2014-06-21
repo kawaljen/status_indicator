@@ -3,39 +3,45 @@ Plugin Name:  Wp ccc status indicator
 Author: cccoders
 Version : 0.1.1
 */
+(function ($) {
+    $(function() {
+        $('.ccc_si_content').each(function () {
+            checkService($(this));
+        });
+    });
 
-
-var widget_config = {
-    'image_id':'status_indicator',
-    'states': {
-        "down":{"img":"http://understanding-geek.com/status_indicator/traffic_light_circle_red.png"},
-        "unknown":{"img":"disable.png"},
-        "up":{"img":"http://understanding-geek.com/status_indicator/traffic_light_circle_green.png"}
-    },
-'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
-}
-
-function setStatusIndicator(status) {
-    status = status || 'unknown';
-    $('#'+widget_config['image_id'])
-    .attr('src', widget_config['states'][status]['img'])
+    function checkService(el) {
+        var config = $(el).data('args');
+        $.ajax({
+            url: config['status_endpoint'],
+            dataType: 'jsonp',
+            beforeSend : function () {
+                setIndicator(el,'loading')
+            },
+            success: function (response) {
+                setIndicator(el,getStatus(response))
+            }
+        });
     }
 
-
-$(document).ready(function(){
-    $.ajax({
-        url: widget_config['status_endpoint'],
-        dataType: 'jsonp',
-        success: function(json) {
+    function setIndicator(el,status) {
+        if (status =='loading') {
+           el.html('Checking service status...<br><br>');
+        }  else {
             try {
-                setStatusIndicator([json.status]);
+                var config = $(el).data('args');
+                el.html(
+                    $('<img/>').attr('src', config['states'][status]['img'])
+                );
             } catch (err) {
-    console.log("Could not find an image for the status reported.");
+                console.log("Could not find an image for the status reported.");
+            }
+        }
     }
-},
-error: function(json) {
-    setStatusIndicator();
-    }
-});
-});
 
+    function getStatus(json) {
+        json.status = json.status || 'unknown';
+        return json.status;
+    }
+
+}(jQuery));
