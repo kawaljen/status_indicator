@@ -1,4 +1,4 @@
-`# Status Indicator Widget
+# Status Indicator Widget
 ## Description 
 Result of a CCCoders hack
 Status indicator
@@ -6,7 +6,7 @@ Status indicator
 ## Tests 
 Tests are written with CasperJS and assume that you have the widget installed on Wordpress a local webserver serving on http://localhost:8080/.
 
-Install CasperJS (http://docs.casperjs.org/en/latest/installation.html#installing-from-homebrew-osx):
+Install [CasperJS](http://docs.casperjs.org/en/latest/installation.html#installing-from-homebrew-osx):
 
     brew update
     brew install casperjs --devel
