@@ -53,7 +53,7 @@ class ccc_si_widget extends WP_Widget {
 			
         <h4>Service end point</h4> 
 				<label  for="<?php echo $this->get_field_name("endpoint"); ?>">Service end point monitored : </label>
-				<input id="<?php echo $this->get_field_id('endpoint'); ?>_" name="<?php echo $this->get_field_name('endpoint'); ?>" type="text"  value="<?php if (isset($endpoint)) { echo $endpoint;} ?>" size="35" />
+				<input id="<?php echo $this->get_field_id('endpoint'); ?>" name="<?php echo $this->get_field_name('endpoint'); ?>" type="text"  value="<?php if (isset($endpoint)) { echo $endpoint;} ?>" size="35" />
 
 
        
