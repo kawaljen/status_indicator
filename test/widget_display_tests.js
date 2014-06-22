@@ -1,23 +1,16 @@
-casper.test.begin('Widget displays', 5, function suite(test) {
+var fixtures = {
+    'src' : 'http://understanding-geek.com/status_indicator/traffic_light_circle_green.png'
+};
+
+casper.test.begin('Widget display on homepage', 2, function suite(test) {
     casper.start('http://localhost:8080/', function() {
-        test.assertExists('.ccc_si_content');
-        test.assertExists('.ccc_si_content img');
+        test.assertExists('.Wp_ccc_status_indicator img');
         test.assertEquals(
-            this.getElementAttribute('.ccc_si_content img', 'src'),
-            old_src,
+            this.getElementAttribute('.Wp_ccc_status_indicator img', 'src'),
+            fixtures.src,
             'Shows correct image'
         );
     });
-
-    casper.then(function() {
-        test.assertExists('#wp_ccc_status_indicator-4 img');
-        test.assertEquals(
-            this.getElementAttribute('#wp_ccc_status_indicator-4 img', 'src'),
-            old_src,
-            'Shows correct image'
-        );
-    });
-
 
     casper.run(function() {
         test.done();

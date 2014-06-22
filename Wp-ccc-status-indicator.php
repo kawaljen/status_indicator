@@ -106,15 +106,10 @@ class ccc_si_widget extends WP_Widget {
 
 		<?php echo $before_widget; ?>
 	
-		<div class="ccc_si_content" id="<?php echo $widget_id;?>">
+		<div class="ccc_si_content" >
 		<script type="text/javascript">
 			jQuery(function($) {
-                widget_config = {
-                     'image_id':'status_indicator',
-                     'states':  <?php echo json_encode($instance); ?>  ,
-                     'status_endpoint':'http://understanding-geek.com/status_indicator/status.php'
-                }
-				$('#<?php echo $widget_id; ?>').data('args', widget_config);
+				$('#<?php echo $widget_id; ?>').data('args', <?php echo json_encode($instance); ?> );
 
 			});
 		</script>
