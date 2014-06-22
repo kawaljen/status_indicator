@@ -8,7 +8,6 @@ Version : 0.1.1
 
 */
 
-//php storm
 class ccc_si_widget extends WP_Widget {
 	function __construct() {
         
@@ -45,19 +44,15 @@ class ccc_si_widget extends WP_Widget {
 	function form( $instance ) {
 		$instance = wp_parse_args( (array) $instance, array( 	'down' => array('id' => 1, 'img' => 'not-up.png'), 
 																'unknown' => array('id' => 2, 'img' => 'disable.png'),
-<<<<<<< HEAD
 																'up' => array('id' => 3, 'img' => 'up.png'),
 																'size' => 100 ));
-=======
-																'up' => array('id' => 3, 'img' => 'up.png') ));
->>>>>>> 2fb098d07c5ac926ec61912401025b972e0ba41b
 		extract($instance);
 		?>
         <div class="ccc_si">
         
         <h4>Status images</h4>    
 		<div>
-<<<<<<< HEAD
+
 			<p>Enter an image url or use the media uploader and click on 'Insert into post'</p>
 			<div>
 				<label  for="<?php echo $this->get_field_name("down"); ?>[img]">Not up : </label>
@@ -74,8 +69,8 @@ class ccc_si_widget extends WP_Widget {
 			<div style="margin-top:10px;">
 				<label  for="<?php echo $this->get_field_name("up"); ?>[img]">up : </label>
 				<input id="<?php echo $this->get_field_id("up"); ?>[img]" type="text" name="<?php echo $this->get_field_name("up"); ?>[img]" value="<?php if (isset($up['img'])) { echo $up['img'];} ?>" size="35" />
-				<input  class="cccsi-upload-button button" type="button" value="Upload Image" /> 	
-=======
+				<input  class="cccsi-upload-button button" type="button" value="Upload Image" /> 
+			</div>
 
 			<div >
 				<label  for="<?php echo $this->get_field_name("down"); ?>[img]">Not up : </label>
@@ -90,7 +85,6 @@ class ccc_si_widget extends WP_Widget {
 			<div >
 				<label  for="<?php echo $this->get_field_name("up"); ?>[img]">Running : </label>
 				<input type="text" class="text" id="<?php echo $this->get_field_id("up"); ?>[img]" name="<?php echo $this->get_field_name("up"); ?>[img]" size="12" value="<?php if (isset($up['img'])) { echo $up['img'];} ?>" />				
->>>>>>> 2fb098d07c5ac926ec61912401025b972e0ba41b
 			</div>			  
 		</div>
          <h4>Images size</h4> 
@@ -106,10 +100,7 @@ class ccc_si_widget extends WP_Widget {
 		$instance['down'] = $new_instance['down'];
 		$instance['unknown'] = $new_instance['unknown'];
 		$instance['up'] = $new_instance['up'];
-<<<<<<< HEAD
 		$instance['size'] = $new_instance['size'];
-=======
->>>>>>> 2fb098d07c5ac926ec61912401025b972e0ba41b
 		return $instance;	
 	}	
 	function widget( $args, $instance ) {	
@@ -119,11 +110,9 @@ class ccc_si_widget extends WP_Widget {
 		wp_enqueue_style('cccsi_widget');  
         
 		?>	
-<<<<<<< HEAD
+
 		<?php echo $before_widget; ?>
-		
-=======
->>>>>>> 2fb098d07c5ac926ec61912401025b972e0ba41b
+	
 		<div class="ccc_si_content" id="<?php echo $widget_id;?>">
 		<script type="text/javascript">
 			jQuery(function($) {
@@ -137,12 +126,9 @@ class ccc_si_widget extends WP_Widget {
 			});
 		</script>
 		</div>
-<<<<<<< HEAD
 		
-		<?php echo $after_widget; ?>
-=======
->>>>>>> 2fb098d07c5ac926ec61912401025b972e0ba41b
-<?php 	
+		<?php echo $after_widget; 
+	
 	}  
 	
 	    
