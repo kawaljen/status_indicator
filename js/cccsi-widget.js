@@ -34,6 +34,7 @@ Version : 0.1.1
                 var config = $(el).data('args');
                 indicator.html(
                     $('<img/>').attr('src', config[status]['img'])
+                               .attr('width',config['size'])
                 );
             } catch (err) {
                 console.log("Could not find an image for the status reported.");

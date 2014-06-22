@@ -7,6 +7,7 @@ var fixtures = {
     'old_src' : 'default',
     'new_src' : 'http://understanding-geek.com/status_indicator/traffic_light_circle_green.png',
     'endpoint': 'http://understanding-geek.com/status_indicator/status.php',
+    'size':'60',
     'wp_user' : 'admin',
     'wp_pass' : 'vagrant'
 };
@@ -36,6 +37,7 @@ casper.test.begin('Widget Admin functions', 5, function suite(test) {
             fields = {};
             fields['widget-wp_ccc_status_indicator['+widget_id_number+'][up][img]'] = fixtures.new_src;
             fields['widget-wp_ccc_status_indicator['+widget_id_number+'][endpoint]'] = fixtures.endpoint;
+            fields['widget-wp_ccc_status_indicator['+widget_id_number+'][size]'] = fixtures.size;
 
             test.assertExists('div#'+widget_control_id +' form');
 
@@ -45,7 +47,7 @@ casper.test.begin('Widget Admin functions', 5, function suite(test) {
             test.assertField('widget-wp_ccc_status_indicator['+widget_id_number+'][up][img]', fixtures.new_src);
         });
 
-        // go back to homepage
+        // go back to homepage     wp_ccc_status_indicator-3
         casper.then(function() {
             this.clickLabel('Visit Site', 'a');
         });
@@ -53,20 +55,21 @@ casper.test.begin('Widget Admin functions', 5, function suite(test) {
         // check the status image is right
         casper.then(function() {
             this.reload(function() {         // otherwise src doesn't update
-                casper.waitForSelector('#'+widget_id+' img', function() {
-                    test.assertExists('#'+widget_id+' img');
-                    test.assertEquals(
-                        this.getElementAttribute('#'+widget_id+' img', 'src'),
-                        fixtures.new_src,
-                        'Image on homepage is as set in admin'
-                    );
-                });
+                test.assertExists('#'+widget_id+' img','img was inserted');
+                test.assertEquals(
+                    this.getElementAttribute('#'+widget_id+' img', 'src'),
+                    fixtures.new_src,
+                    'Image on homepage is as set in admin'
+                );
+
+                test.assertEquals(
+                    this.getElementAttribute('#'+widget_id+' img', 'width'),
+                    fixtures.size,
+                    'Size of image on homepage is as set in admin'
+                );
             });
         });
-
     });
-
-
 
     casper.run(function() {
         test.done();
