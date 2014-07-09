@@ -5,7 +5,7 @@ Version : 0.1.1
 */
 (function ($) {
     $(function() {
-        $('.ccc_si_content').each(function () {
+        $('.Wp_ccc_status_indicator').each(function () {
             checkService($(this));
         });
     });
@@ -13,7 +13,7 @@ Version : 0.1.1
     function checkService(el) {
         var config = $(el).data('args');
         $.ajax({
-            url: config['status_endpoint'],
+            url: config['endpoint'],
             dataType: 'jsonp',
             beforeSend : function () {
                 setIndicator(el,'loading')
@@ -25,13 +25,16 @@ Version : 0.1.1
     }
 
     function setIndicator(el,status) {
+        var indicator = el.children('div');
+
         if (status =='loading') {
-           el.html('Checking service status...<br><br>');
+            indicator.html('Checking service status...<br><br>');
         }  else {
             try {
                 var config = $(el).data('args');
-                el.html(
-                    $('<img/>').attr('src', config['states'][status]['img'])
+                indicator.html(
+                    $('<img/>').attr('src', config[status]['img'])
+                               .attr('width',config['size'])
                 );
             } catch (err) {
                 console.log("Could not find an image for the status reported.");
