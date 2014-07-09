@@ -43,9 +43,9 @@ class ccc_si_widget extends WP_Widget {
     	
 	function form( $instance ) {
 		$defaultimg= plugins_url('img/smallthumb.png', __FILE__);
-		$instance = wp_parse_args( (array) $instance, array( 	'down' => array('message' => ' ' , 'img' => ''), 
-																'unknown' => array('message' => ' ', 'img' => ''),
-																'up' => array('message' => ' ', 'img' => ''),
+		$instance = wp_parse_args( (array) $instance, array( 	'down' => ' ';
+																'unknown' => ' ';
+																'up' => ' ';
 																'size' => 100, 
 																'endpoint' => 'default'));
 		extract($instance);
@@ -66,38 +66,32 @@ class ccc_si_widget extends WP_Widget {
 			<div>
 				<h5>Running : </h5>
 				<p>Image</p>
-				<img src="<?php if(!empty($up['img'])){echo $up['img'];}else{ echo $defaultimg;}?>" alt="preview" class="ccc_preview" width=75 style="border:1px solid #eee; padding:3px; margin:0 auto;"/>
+				<img src="<?php if(!empty($up)){echo $up;}else{ echo $defaultimg;}?>" alt="preview" class="ccc_preview" width=75 style="border:1px solid #eee; padding:3px; margin:0 auto;"/>
 				<div class="clear"></div>			
 				<input  class="cccsi-upload-button button" type="button" value="Media/upload" />
-				<label  for="<?php echo $this->get_field_name("up"); ?>[img]" style="line-height:26px;">Or enter an url : </label>
-				<input id="<?php echo $this->get_field_id("up"); ?>[img]" type="text" name="<?php echo $this->get_field_name("up"); ?>[img]" value="<?php if (isset($up['img'])) { echo $up['img'];} ?>" size="35" style="margin-top:5px;"/> 
+				<label  for="<?php echo $this->get_field_name("up"); ?>" style="line-height:26px;">Or enter an url : </label>
+				<input id="<?php echo $this->get_field_id("up"); ?>" type="text" name="<?php echo $this->get_field_name("up"); ?>" value="<?php if (isset($up)) { echo $up;} ?>" size="35" style="margin-top:5px;"/> 
 				
-				<p>Front en message :</p>
-				<textarea id="<?php echo $this->get_field_id("up"); ?>[message]"  name="<?php echo $this->get_field_name("up"); ?>[message]"><?php if (isset($up['message'])) { echo $up['message'];} ?></textarea>
 			</div>	
 
 			<div style="margin-top:10px;">
 				<h5>Disable : </h5>
 				<p>Image</p>
-				<img src="<?php if (!empty($unknown['img'])) { echo $unknown['img'];}else{ echo $defaultimg;}?>" alt="preview" class="ccc_preview" width=75 style="border:1px solid #eee; padding:3px; margin:0 auto;"/>
+				<img src="<?php if (!empty($unknown)) { echo $unknown;}else{ echo $defaultimg;}?>" alt="preview" class="ccc_preview" width=75 style="border:1px solid #eee; padding:3px; margin:0 auto;"/>
 				<div class="clear"></div>
 				<input  class="cccsi-upload-button button" type="button" value="Media/upload" />    
-				<label  for="<?php echo $this->get_field_name("unknown"); ?>[img]" style="line-height:26px;">Or enter an url : </label>
-				<input id="<?php echo $this->get_field_id("unknown"); ?>[img]" type="text" name="<?php echo $this->get_field_name("unknown"); ?>[img]" value="<?php if (isset($unknown['img'])) { echo $unknown['img'];} ?>" size="35" style="margin-top:5px;"/>
-				<p>Front en message :</p>				
-				<textarea id="<?php echo $this->get_field_id("unkown"); ?>[message]"  name="<?php echo $this->get_field_name("unkown"); ?>[message]"><?php if (isset($unknown['message'])) { echo $unknown['message'];} ?></textarea>
+				<label  for="<?php echo $this->get_field_name("unknown"); ?>" style="line-height:26px;">Or enter an url : </label>
+				<input id="<?php echo $this->get_field_id("unknown"); ?>" type="text" name="<?php echo $this->get_field_name("unknown"); ?>" value="<?php if (isset($unknown)) { echo $unknown;} ?>" size="35" style="margin-top:5px;"/>
 			</div>
 			
 			<div style="margin-top:10px;">
 				<h5>Not running : </h5>
 				<p>Image</p>
-				<img src="<?php if(!empty($down['img'])){echo $down['img'];}else{ echo $defaultimg;}?>" alt="preview" width=75 class="ccc_preview" style="border:1px solid #eee; padding:3px;"/>
+				<img src="<?php if(!empty($down)){echo $down;}else{ echo $defaultimg;}?>" alt="preview" width=75 class="ccc_preview" style="border:1px solid #eee; padding:3px;"/>
 				<div class="clear"></div>
 				<input  class="cccsi-upload-button button" type="button" value="Media/upload" />  
-				<label  for="<?php echo $this->get_field_name("down"); ?>[img]" style="line-height:26px;">Or enter absolute path url : </label>
-				<input id="<?php echo $this->get_field_id("down"); ?>[img]" type="text" name="<?php echo $this->get_field_name("down"); ?>[img]" value="<?php if (isset($down['img'])) { echo $down['img'];} ?>" size="35" style="margin-top:5px;"/>    
-				<p>Front en message :</p>				
-				<textarea id="<?php echo $this->get_field_id("down"); ?>[message]"  name="<?php echo $this->get_field_name("down"); ?>[message]"><?php if (isset($down['message'])) { echo $down['message'];} ?></textarea>			
+				<label  for="<?php echo $this->get_field_name("down"); ?>" style="line-height:26px;">Or enter absolute path url : </label>
+				<input id="<?php echo $this->get_field_id("down"); ?>" type="text" name="<?php echo $this->get_field_name("down"); ?>" value="<?php if (isset($down)) { echo $down;} ?>" size="35" style="margin-top:5px;"/>    
 			</div>
 	  
 		</div>
@@ -116,7 +110,6 @@ class ccc_si_widget extends WP_Widget {
 		$instance['up'] = $new_instance['up'];
 		$instance['size'] = $new_instance['size'];
 		$instance['endpoint'] = $new_instance['endpoint'];
-		$instance['message'] = $new_instance['message'];
 		return $instance;	
 	}	
 	function widget( $args, $instance ) {	

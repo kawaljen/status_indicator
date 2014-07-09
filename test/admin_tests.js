@@ -35,7 +35,7 @@ casper.test.begin('Widget Admin functions', 5, function suite(test) {
             widget_id = "wp_ccc_status_indicator-"+ widget_id_number;
 
             fields = {};
-            fields['widget-wp_ccc_status_indicator['+widget_id_number+'][up][img]'] = fixtures.new_src;
+            fields['widget-wp_ccc_status_indicator['+widget_id_number+'][up]'] = fixtures.new_src;
             fields['widget-wp_ccc_status_indicator['+widget_id_number+'][endpoint]'] = fixtures.endpoint;
             fields['widget-wp_ccc_status_indicator['+widget_id_number+'][size]'] = fixtures.size;
 
@@ -44,7 +44,7 @@ casper.test.begin('Widget Admin functions', 5, function suite(test) {
             this.fill('div#'+widget_control_id+' form', fields, false);
             this.click("#widget-wp_ccc_status_indicator-"+widget_id_number+"-savewidget");
 
-            test.assertField('widget-wp_ccc_status_indicator['+widget_id_number+'][up][img]', fixtures.new_src);
+            test.assertField('widget-wp_ccc_status_indicator['+widget_id_number+'][up]', fixtures.new_src);
         });
 
         // go back to homepage     wp_ccc_status_indicator-3
