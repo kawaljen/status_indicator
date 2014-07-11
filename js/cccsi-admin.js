@@ -5,8 +5,7 @@ Version : 0.1.1
 */
 jQuery(document).ready(function() {
  
-    var formfield, imgpreview, 
-		host = 'http://localhost/serveur/wordpress/'; //'http://'+jQuery(location).attr('hostname'); 
+    var formfield, imgpreview;
     
     jQuery('body').on('click','.cccsi-upload-button',function(){
         formfield = jQuery(this).parent().find('input:text'); 
@@ -38,7 +37,7 @@ jQuery(document).ready(function() {
 
 	
 	jQuery('.ccc_preview').on('error', function(){ 
-				jQuery(this).attr('src', host+'/wp-content/plugins/wp-ccc-status-indicator/img/smallthumb.png');
+				jQuery(this).attr('src', '../wp-content/plugins/wp-ccc-status-indicator/img/smallthumb.png');
 				jQuery(this).next().append('<p class="cccsi_error">! An error occured, check this url.</p>');
 		}).attr('src',  jQuery(this).attr('src'));
 
